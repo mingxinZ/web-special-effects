@@ -1,71 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        html,body {
-            margin: 0;
-            overflow:hidden;
-            width: 100%;
-            height: 100%;
-            cursor: none;
-            background: black;
-        }
-    </style>
-</head>
-<body>
-<canvas id="canvas"></canvas>
-<script>
-    var ctx=document.getElementById("canvas");
-    var content=ctx.getContext("2d");
-
-    var cWidth=document.documentElement.clientWidth;
-    var cHeight=document.documentElement.clientHeight;
-    var round=[];
-    ctx.width=cWidth;
-    ctx.height=cHeight;
-    var roundPopulation=300;
-    function Round_item(index,x,y) {
-        this.index=index;
-        this.x=x;
-        this.y=y;
-        this.r=Math.random()*2+1;
-        var opa=(Math.floor(Math.random()*10)+1)/10/2;
-        this.color="rgba("+Math.floor(Math.random()*360)+","+Math.floor(Math.random()*360)+","+Math.floor(Math.random()*360)+","+opa+")";
-    }
-    Round_item.prototype.draw=function () {
-        content.fillStyle=this.color;
-        content.shadowBlur = this.r*2;
-        content.beginPath();
-        content.arc(this.x,this.y,this.r,0,2*Math.PI,false);
-        content.closePath();
-        content.fill();
-    };
-    Round_item.prototype.move=function () {
-        this.y-=1.5;
-        if (this.y<=-10){
-            this.y=10+cHeight;
-        }
-        this.draw();
-    };
-
-    function animate() {
-        content.clearRect(0, 0, cWidth, cHeight);
-        for (var i in round) {
-            round[i].move();
-        }
-        requestAnimationFrame(animate);
-    }
-    function init() {
-        for (var i=0;i<roundPopulation;i++){
-            round[i]=new Round_item(i,Math.random()*cWidth,Math.random()*cHeight);
-            round[i].draw();
-        }
-        animate();
-    }
-    init();
-
-</script>
-</body>
-</html>
+网页效果预览：
+http://htmlpreview.github.io/?https://github.com/mingxinZ/web-special-effects/blob/master/%E5%A4%9A%E5%BD%A9%E7%B2%92%E5%AD%90%E4%B8%8A%E6%B5%AE%E7%89%B9%E6%95%88.html
+用canvas+JS撸了一个非常简单的网页特效：多彩粒子从下至上的浮动。
+参考了掘金上一位前辈的小册：《如何使用canvas制作出炫酷的网页背景特效》
+当然，我这个一点不炫酷，只是个基础，练手的。
+嘿嘿，第一次在Github上发布。
+也终于弄懂了如何在Github上预览网页效果。
+    
+    
